@@ -20,7 +20,7 @@ class Counter extends Component {
   render() {
     const { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     return (
-      <p>kuhl besser Jehaw
+      <p>
         Clicked: {counter} times
         {' '}
         <button onClick={increment}>+</button>
