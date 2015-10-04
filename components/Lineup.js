@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as EventActions from '../actions/events';
-import { playersWithEvents } from '../selectors/playersWithEvents';
+import { playersWithEventsSelector } from '../selectors/playersWithEvents';
 import PlayerList from './PlayerList';
+import LineupSummary from './LineupSummary';
 
 
 @connect(
-  playersWithEvents,
+  playersWithEventsSelector,
   dispatch => bindActionCreators(EventActions, dispatch)
 )
 class Lineup extends Component {
@@ -25,6 +26,7 @@ class Lineup extends Component {
     return (
       <div>
         <h2>Aufstellung oha</h2>
+        <LineupSummary lineupId={1} />
         <button onClick={triggerGameEvent}> GameEvent</button>
         <PlayerList players={players} />
       </div>

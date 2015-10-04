@@ -8,11 +8,11 @@ class PlayerList extends Component {
   render() {
     const { players } = this.props;
     return (
-      <p>
+      <div>
         {players.map(
           (p) => <Player key={p.get('name')} player={p} />
-        )}
-      </p>
+      ).valueSeq()}
+      </div>
     );
   }
 }

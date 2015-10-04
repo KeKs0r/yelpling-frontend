@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-function selectTodos(players, events) {
+function selectPlayers(players, events) {
     return players.map(p => {
       const pEvents = events.get(p.get('id'));
       return p.set('events', pEvents)
@@ -18,7 +18,7 @@ function selectTodos(players, events) {
  * and memoization wouldn't provide any benefits.
  */
 const players = state => state.players;
-const events = state => state.eventsByPlayers;
+const events = state => state.eventsByPlayer;
 
 /*
  * Definition of combined-selector.
@@ -32,7 +32,7 @@ export const playersWithEventsSelector = createSelector(
   events,
   (players, events) => {
     return {
-      playersWithEvents: selectTodos(players, events)
+      players: selectPlayers(players, events)
     };
   }
 );
