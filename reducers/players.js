@@ -1,11 +1,6 @@
 import { POINTS_CHANGE } from '../actions/players';
 import { Map } from 'immutable';
-
-const GOAL = 'GOAL';
-const DEF = 'DEF';
-const MID = 'MID';
-const ATT = 'ATT';
-
+import {GOAL, DEF, MID, ATT} from '../constants';
 
 const initialState = new Map()
   .set(1, new Map({id: 1, name: 'Thomas Müller', price: 10, position: ATT }))

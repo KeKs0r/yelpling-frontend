@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import * as LineupActions from '../actions/lineup';
-import { lineupWithPlayers }from '../selectors/lineup';
+import { lineupWithPlayers } from '../selectors/lineup';
+
 import PositionList from './PositionList';
 import LineupBudget from './LineupBudget';
 import { system } from '../reducers/lineups';
@@ -27,13 +28,9 @@ export default class TeamSelection extends Component {
     return (
       <div>
         <LineupBudget openCount={11 - lineup.size} costs={costs} />
-        <h4>Tor ({goal} / {system.GOAL})</h4>
         <PositionList players={grouped.get('GOAL')} position="GOAL" count={system.GOAL} />
-        <h4>Verteidigung ({def} / {system.DEF})</h4>
         <PositionList players={grouped.get('DEF')} position="DEF" count={system.DEF} />
-        <h4>Mittelfeld ({mid} / {system.MID})</h4>
         <PositionList players={grouped.get('MID')} position="MID" count={system.MID} />
-        <h4>Sturm ({att} / {system.ATT})</h4>
         <PositionList players={grouped.get('ATT')} position="ATT" count={system.ATT} />
         <button disabled={lineup.size < 11 || costs > BUDGET}>Aufstellung speichern</button>
       </div>
