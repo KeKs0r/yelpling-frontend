@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { List } from 'material-ui';
 import Player from './Player';
 
 class PlayerList extends Component {
@@ -8,11 +9,11 @@ class PlayerList extends Component {
   render() {
     const { players } = this.props;
     return (
-      <div>
+      <List>
         {players.map(
           (p) => <Player key={p.get('name')} player={p} />
       ).valueSeq()}
-      </div>
+    </List>
     );
   }
 }

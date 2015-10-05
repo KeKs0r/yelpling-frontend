@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Player from './Player';
 import { Map } from 'immutable';
 import { Link } from 'react-router'
-import { List, ListDivider, ListItem, Avatar } from 'material-ui';
+import { List, ListItem, Avatar } from 'material-ui';
 import { GOAL, DEF, MID, ATT} from '../constants';
 
 export default class PlayerList extends Component {

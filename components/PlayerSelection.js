@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import * as LineupActions from '../actions/lineup';
 import { playersWithLineupStatus} from '../selectors/lineup';
 import SearchField from './SearchField';
+import Player from './Player';
+import { FontIcon, Styles } from 'material-ui';
+const Colors = Styles.Colors;
 
 @connect(
   playersWithLineupStatus,
@@ -20,11 +23,11 @@ export default class PlayerSelection extends Component {
       const add = () => addToLineup(p.get('id'));
       const remove = () => removeFromLineup(p.get('id'));
       if(p.get('selected')){
-        action = (<span onClick={remove}>x</span>);
+        action = (<FontIcon onClick={remove} className="fa fa-fw fa-remove" color={Colors.red300} />);
       } else if(missing.get(p.get('position'))){
-        action =(<span onClick={add}>+</span>);
+        action =(<FontIcon onClick={add} color={Colors.green500} className="fa fa-fw fa-plus-circle" />);
       }
-      return (<li key={p.get('id')}>{p.get('name')} ${p.get('price')} {action}</li>);
+      return (<Player key={p.get('id')} player={p} rightIconButton={action} />);
     }).valueSeq();
     return (
       <div>
