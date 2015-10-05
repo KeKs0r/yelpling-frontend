@@ -24,7 +24,7 @@ export default class PlayerSelection extends Component {
       } else if(missing.get(p.get('position'))){
         action =(<span onClick={add}>+</span>);
       }
-      return (<li key={p.get('id')}>{p.get('name')} {action}</li>);
+      return (<li key={p.get('id')}>{p.get('name')} ${p.get('price')} {action}</li>);
     }).valueSeq();
     return (
       <div>

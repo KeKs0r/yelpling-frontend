@@ -58,8 +58,11 @@ export const _lineupWithPlayers = createSelector(
 
 export const lineupWithPlayers = createSelector(
   _lineupWithPlayers,
-  (l) => {
-    return { lineup: l };
+  (lwp) => {
+    return {
+      lineup: lwp,
+      costs: costs(lwp)
+    };
   }
 )
 
