@@ -1,6 +1,13 @@
 import { ADD_TO_LINEUP, REMOVE_FROM_LINEUP } from '../actions/lineup';
 import { Map, Set} from 'immutable';
 
+export const system = {
+  GOAL: 1,
+  DEF: 4,
+  MID: 4,
+  ATT: 2
+};
+
 
 const initialState = new Map()
   .set(1, new Map({user: 1, players: new Set([1,3,5])}))
