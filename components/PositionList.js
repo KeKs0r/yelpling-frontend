@@ -2,22 +2,22 @@ import React, { Component, PropTypes } from 'react';
 import Player from './Player';
 import { Map } from 'immutable';
 import { Link } from 'react-router'
-import { List, ListDivider, ListItem } from 'material-ui';
+import { List, ListDivider, ListItem, Avatar } from 'material-ui';
 import { GOAL, DEF, MID, ATT} from '../constants';
 
-class PlayerList extends Component {
+export default class PlayerList extends Component {
   static propTypes = {
     players: PropTypes.object,
     position: PropTypes.string.isRequired,
-    count: PropTypes.number
+    count: PropTypes.number,
+    selectPosition: PropTypes.func.isRequired,
+    selectPlayer: PropTypes.func.isRequired
   }
   static defaultProps = {
     players: new Map(),
     count: 1
   }
   getPositionHeadline() {
-    console.log(this.props.position);
-    console.log(GOAL);
     switch(this.props.position) {
       case GOAL:
         return 'Torwart';
@@ -30,16 +30,22 @@ class PlayerList extends Component {
     }
   }
   render() {
-    const { players, position, count } = this.props;
+    const { players, position, count, selectPlayer} = this.props;
     const fillNumber = count - players.size;
 
     const playersOut = players.map(
-        (p) => (<ListItem key={'player_'+p.get('id')} primaryText={p.get('name')} />)
+        (p) => (<ListItem key={'player_'+p.get('id')}
+          primaryText={p.get('name')}
+          leftAvatar={<Avatar src={p.get('image')} />}
+          onClick={() => { selectPlayer(p.get('id')) } }
+          />)
       ).valueSeq();
     const fillOut = [];
     for (let i = 0; i < fillNumber; i++) {
-      const link = <Link component="span" to="/team" query={{position:position}} >Select</Link>
-      fillOut.push(<ListItem primaryText={link} key={i} />)
+      fillOut.push(<ListItem key={i}
+        primaryText={"Select"}
+        onClick={this.selectPosition}
+        />)
     }
     let headline = this.getPositionHeadline();
     if(count > players.size){
@@ -52,6 +58,7 @@ class PlayerList extends Component {
       </List>
     );
   }
+  selectPosition = () => {
+    this.props.selectPosition(this.props.position);
+  }
 }
-
-export default PlayerList;
