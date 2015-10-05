@@ -1,5 +1,7 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { reduxReactRouter } from 'redux-router';
+import createHistory from 'history/lib/createHashHistory';
 import reducer from '../reducers';
 let middleware = [thunk];
 
@@ -9,8 +11,12 @@ if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !=='production') {
   middleware = [...middleware, logger];
 }
 
-const createStoreWithMiddleware = applyMiddleware(
-  ...middleware
+const createStoreWithMiddleware = compose(
+  applyMiddleware(...middleware),
+  reduxReactRouter({
+    // routes,
+    createHistory
+})
 )(createStore);
 
 export default function configureStore(initialState) {

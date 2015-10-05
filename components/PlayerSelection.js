@@ -13,17 +13,17 @@ export default class PlayerSelection extends Component {
     players: PropTypes.object.isRequired
   }
   render() {
-    const { players, addToLineup, removeFromLineup, missing } = this.props;
+    const { players, addToLineup, removeFromLineup, missing, costs } = this.props;
     const playersOut = players.map((p) => {
       let action;
       const add = () => addToLineup(p.get('id'));
       const remove = () => removeFromLineup(p.get('id'));
       if(p.get('selected')){
         action = (<span onClick={remove}>x</span>);
-      } else if(missing[p.get('position')]){
+      } else if(missing.get(p.get('position'))){
         action =(<span onClick={add}>+</span>);
       }
-      return (<li  key={p.get('id')}>{p.get('name')} {action}</li>);
+      return (<li key={p.get('id')}>{p.get('name')} {action}</li>);
     }).valueSeq();
     return (
       <div>

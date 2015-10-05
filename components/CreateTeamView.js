@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TeamSelection from './TeamSelection';
 import PlayerSelection  from './PlayerSelection';
+import LineupSummary  from './LineupSummary';
 
 
 export default class CreateTeamView extends Component {
@@ -8,6 +9,7 @@ export default class CreateTeamView extends Component {
     return (
       <div>
         <div style={{float:'left'}}>
+          {/*<LineupSummary linupId={1} />*/}
           <TeamSelection lineupId={1}/>
         </div>
         <div style={{float:'left'}}>

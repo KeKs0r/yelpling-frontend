@@ -15,23 +15,28 @@ export default class TeamSelection extends Component {
     lineup: PropTypes.object.isRequired
   }
   render() {
-    const { lineup} = this.props;
+    const { lineup } = this.props;
     const grouped = lineup.groupBy((p) => p.get('position'));
     const goal = (grouped.get('GOAL')) ? grouped.get('GOAL').size : 0;
     const def = (grouped.get('DEF')) ? grouped.get('DEF').size : 0;
     const mid = (grouped.get('MID')) ? grouped.get('MID').size : 0;
     const att = (grouped.get('ATT')) ? grouped.get('ATT').size : 0;
+    let action;
+    if(lineup.size >= 11){
+      action = (<button>Aufstellung speichern</button>);
+    }
     return (
       <div>
         <h3>Team</h3>
         <h4>Tor ({goal} / {system.GOAL})</h4>
-        <PositionList players={grouped.get('GOAL')} position="GOAL" count={1} />
+        <PositionList players={grouped.get('GOAL')} position="GOAL" count={system.GOAL} />
         <h4>Verteidigung ({def} / {system.DEF})</h4>
-        <PositionList players={grouped.get('DEF')} position="DEF" count={4} />
+        <PositionList players={grouped.get('DEF')} position="DEF" count={system.DEF} />
         <h4>Mittelfeld ({mid} / {system.MID})</h4>
-        <PositionList players={grouped.get('MID')} position="MID" count={4} />
+        <PositionList players={grouped.get('MID')} position="MID" count={system.MID} />
         <h4>Sturm ({att} / {system.ATT})</h4>
-        <PositionList players={grouped.get('ATT')} position="ATT" count={2} />
+        <PositionList players={grouped.get('ATT')} position="ATT" count={system.ATT} />
+        {action}
       </div>
     );
   }

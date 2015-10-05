@@ -17,10 +17,14 @@ const costs = (lineupWithPlayers) => {
     return lineupWithPlayers.reduce((k, v) => k + v.get('price'), 0);
 }
 
-const playersWithStatus = (players, lineup) => {
-  return players.map((p) => {
+const playersWithStatus = (players, lineup, filter) => {
+  let result = players.map((p) => {
       return p.set('selected', lineup.get('players').has(p.get('id')));
   });
+  if(filter){
+    result = result.filter((p) => (p.get('position') === filter));
+  }
+  return result;
 }
 
 const missing = (lineup) => {
@@ -29,17 +33,19 @@ const missing = (lineup) => {
   const def = (g.get('DEF')) ? g.get('DEF').size : 0;
   const mid = (g.get('MID')) ? g.get('MID').size : 0;
   const att = (g.get('ATT')) ? g.get('ATT').size : 0;
-  const m = {
+  let m = {
     GOAL: system.GOAL - goal,
     DEF: system.DEF - def ,
     MID: system.MID - mid,
-    ATT: system.ATT - att
+    ATT: system.ATT - att,
   }
-  return m;
+  m.TOTAL = m.GOAL + m.DEF + m.MID + m.ATT;
+  return new Map(m);
 }
 
 const players = state => state.players;
 const lineup = (state, props) => state.lineups.get(props.lineupId);
+const query = state => state.router.location.query;
 
 export const _lineupWithPlayers = createSelector(
   players,
@@ -78,11 +84,13 @@ export const lineupSummary = createSelector(
 export const playersWithLineupStatus = createSelector(
   players,
   lineup,
+  query,
   _lineupWithPlayers,
-  (players, lineup, lwp) => {
+  (players, lineup, query, lwp) => {
     return {
-      players: playersWithStatus(players, lineup),
-      missing: missing(lwp)
+      players: playersWithStatus(players, lineup, query.position),
+      missing: missing(lwp),
+      costs: costs(lwp)
     };
   }
 );

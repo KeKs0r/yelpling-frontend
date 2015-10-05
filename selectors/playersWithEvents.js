@@ -3,11 +3,13 @@ import { createSelector } from 'reselect';
 function selectPlayers(players, events) {
     return players.map(p => {
       const pEvents = events.get(p.get('id'));
+      const score = (pEvents) ?
+                    pEvents.reduce((r, v) => {
+                        return r + v.score;
+                    },0) : 0
+
       return p.set('events', pEvents)
-              .set('score',
-                pEvents.reduce((r, v) => {
-                  return r + v.score;
-                },0));
+              .set('score', score);
     })
 }
 
