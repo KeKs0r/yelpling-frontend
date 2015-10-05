@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as LineupActions from '../actions/lineup';
-import { playersWithLineupStatus}from '../selectors/lineup';
+import { playersWithLineupStatus} from '../selectors/lineup';
+import SearchField from './SearchField';
 
 @connect(
   playersWithLineupStatus,
@@ -27,6 +28,7 @@ export default class PlayerSelection extends Component {
     }).valueSeq();
     return (
       <div>
+        <SearchField />
         {playersOut}
       </div>
     );

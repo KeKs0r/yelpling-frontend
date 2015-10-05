@@ -17,12 +17,15 @@ const costs = (lineupWithPlayers) => {
     return lineupWithPlayers.reduce((k, v) => k + v.get('price'), 0);
 }
 
-const playersWithStatus = (players, lineup, filter) => {
+const playersWithStatus = (players, lineup, filter, search) => {
   let result = players.map((p) => {
       return p.set('selected', lineup.get('players').has(p.get('id')));
   });
   if(filter){
     result = result.filter((p) => (p.get('position') === filter));
+  }
+  if(search) {
+    result = result.filter((p) => (p.get('name').toLowerCase().indexOf(search.toLowerCase()) > -1))
   }
   return result;
 }
@@ -88,7 +91,7 @@ export const playersWithLineupStatus = createSelector(
   _lineupWithPlayers,
   (players, lineup, query, lwp) => {
     return {
-      players: playersWithStatus(players, lineup, query.position),
+      players: playersWithStatus(players, lineup, query.position, query.s),
       missing: missing(lwp),
       costs: costs(lwp)
     };
