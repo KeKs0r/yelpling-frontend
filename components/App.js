@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-
+import { ToolBar, AppBar } from 'material-ui';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <h1>Super App</h1>
+        <AppBar title="Draftling" iconClassNameRight="muidocs-icon-navigation-expand-more" style={{paddingButtom:'5px', width:'82%'}}/>
         {this.props.children}
       </div>
     );

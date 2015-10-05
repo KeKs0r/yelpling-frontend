@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { lineupSummary } from '../selectors/lineup';
 import { BUDGET } from '../config';
+import { CardTitle } from 'material-ui';
 
 export default class LineupBudget extends Component {
   static propTypes = {
@@ -14,19 +15,16 @@ export default class LineupBudget extends Component {
 
     let remainingOut, subOut;
     if(remaining > 0){
-      remainingOut = (<p>$ {remaining} remaining</p>);
+      remainingOut = '$ ' +remaining+' remaining';
       if(openCount > 0){
         const avgRemaining = Math.floor(remaining / openCount);
-        subOut = <p>{avgRemaining} per open position({openCount})</p>
+        subOut = '$ '+avgRemaining +' per open position ('+openCount+')';
       }
     } else {
-      remainingOut = (<span>Already {remaining * -1} over budget</span>);
+      remainingOut = 'Already '+ (remaining * -1) + ' over budget'
     }
     return (
-      <div>
-          {remainingOut}
-          {subOut}
-      </div>
+      <CardTitle title={remainingOut} subtitle={subOut} />
     );
   }
 }

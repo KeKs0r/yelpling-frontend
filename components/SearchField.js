@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { replaceState } from 'redux-router';
+import { TextField } from 'material-ui';
+import blacklist from 'blacklist';
 
 
 @connect(
@@ -18,10 +20,10 @@ export default class SearchField extends Component {
   }
   render() {
     const { query } = this.props;
+    let propTypes = Object.keys(SearchField.propTypes);
+    const curated = blacklist(this.props, ...propTypes);
     return (
-      <div>
-        <input type="search" onChange={this.handleChange.bind(this)} value={query.s} />
-      </div>
+      <TextField type="search" onChange={this.handleChange.bind(this)} value={query.s} floatingLabelText="Suche Verteidiger" {...curated} />
     );
   }
   handleChange(e) {

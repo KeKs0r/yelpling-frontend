@@ -12,17 +12,13 @@ export default class Player extends Component {
     const player = this.props.player.toJS();
     let propTypes = Object.keys(Player.propTypes);
     const curated = blacklist(this.props, ...propTypes);
-    return (<ListItem
-      leftAvatar={<Avatar src={player.image} />}
-      primaryText={player.name}
-      secondaryText={'$' + player.price}
-      {...curated}
-      />)
     return (
-      <div>
-        <li>{player.name} - {player.score}</li>
-        <PlayerEvents events={player.events} />
-    </div>
-    );
+        <ListItem
+        leftAvatar={<Avatar src={player.image} />}
+        primaryText={player.name}
+        secondaryText={'$' + player.price}
+        {...curated}
+        />
+    )
   }
 }

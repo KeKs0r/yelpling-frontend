@@ -2,12 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import Player from './Player';
 import { Map } from 'immutable';
 import { Link } from 'react-router'
-import { List, ListItem, Avatar } from 'material-ui';
+import { List, ListItem, Avatar, FontIcon, IconButton, Styles, Utils } from 'material-ui';
+const { Colors, ThemeManager } = Styles;
+const { ColorManipulator } = Utils;
 import { GOAL, DEF, MID, ATT} from '../constants';
 
 export default class PlayerList extends Component {
   static propTypes = {
     players: PropTypes.object,
+    selectedPlayer: PropTypes.number,
+    selectedPosition: PropTypes.string,
     position: PropTypes.string.isRequired,
     count: PropTypes.number,
     selectPosition: PropTypes.func.isRequired,
@@ -16,6 +20,9 @@ export default class PlayerList extends Component {
   static defaultProps = {
     players: new Map(),
     count: 1
+  }
+  static contextTypes = {
+    muiTheme: React.PropTypes.object,
   }
   getPositionHeadline() {
     switch(this.props.position) {
@@ -29,22 +36,41 @@ export default class PlayerList extends Component {
         return 'Sturm';
     }
   }
+
+  getColor() {
+    const theme = this.context.muiTheme ? this.context.muiTheme : ThemeManager.getMuiTheme(DefaultRawTheme);
+    const textColor = theme.rawTheme.palette.primary1Color;
+    return ColorManipulator.fade(textColor, 0.1);
+  }
+
   render() {
-    const { players, position, count, selectPlayer} = this.props;
+    const { players, position, selectedPlayer, selectedPosition, count, selectPlayer} = this.props;
     const fillNumber = count - players.size;
 
+
+
     const playersOut = players.map(
-        (p) => (<ListItem key={'player_'+p.get('id')}
-          primaryText={p.get('name')}
-          leftAvatar={<Avatar src={p.get('image')} />}
-          onClick={() => { selectPlayer(p.get('id')) } }
-          />)
-      ).valueSeq();
+        (p) => {
+          const selectedStyle = (p.get('id') === selectedPlayer) ? {backgroundColor: this.getColor()} : {};
+          const button = (
+            <IconButton onClick={() => { selectPlayer(p.get('id'))} }>
+                <FontIcon className="fa fa-exchange" color={Colors.blue300}  />
+            </IconButton>);
+          return (<Player key={'player_'+p.get('id')} player={p} rightIconButton={button}  style={selectedStyle} />);
+      }).valueSeq();
+
+
     const fillOut = [];
     for (let i = 0; i < fillNumber; i++) {
+      const selectedStyle = (i === 0 && position === selectedPosition && !selectedPlayer) ? {backgroundColor: this.getColor()} : {};
+      const button = (<IconButton>
+            <FontIcon className="fa fa-plus" color={Colors.blue300}  />
+          </IconButton>)
       fillOut.push(<ListItem key={i}
-        primaryText={"Select"}
+        primaryText={this.getPositionHeadline() + ' auswählen'}
+        rightIconButton={button}
         onClick={this.selectPosition}
+        style={selectedStyle}
         />)
     }
     let headline = this.getPositionHeadline();
