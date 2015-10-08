@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import { List, ListItem, Avatar, FontIcon, IconButton, Styles, Utils } from 'material-ui';
 const { Colors, ThemeManager } = Styles;
 const { ColorManipulator } = Utils;
-import { GOAL, DEF, MID, ATT} from '../constants';
+import { LINEUP } from '../texts';
 
 export default class PlayerList extends Component {
   static propTypes = {
@@ -25,16 +25,8 @@ export default class PlayerList extends Component {
     muiTheme: React.PropTypes.object,
   }
   getPositionHeadline() {
-    switch(this.props.position) {
-      case GOAL:
-        return 'Torwart';
-      case DEF:
-        return 'Verteidigung';
-      case MID:
-        return 'Mittelfeld';
-      case ATT:
-        return 'Sturm';
-    }
+    const key = 'POSITION_'+this.props.position;
+    return LINEUP[key];
   }
 
   getColor() {
@@ -53,7 +45,7 @@ export default class PlayerList extends Component {
         (p) => {
           const selectedStyle = (p.get('id') === selectedPlayer) ? {backgroundColor: this.getColor()} : {};
           const button = (
-            <IconButton onClick={() => { selectPlayer(p.get('id'))} }>
+            <IconButton onClick={() => { selectPlayer(p.get('id'), p.get('position'))} }>
                 <FontIcon className="fa fa-exchange" color={Colors.blue300}  />
             </IconButton>);
           return (<Player key={'player_'+p.get('id')} player={p} rightIconButton={button}  style={selectedStyle} />);

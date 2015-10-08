@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <AppBar title="Draftling" iconClassNameRight="muidocs-icon-navigation-expand-more" style={{paddingButtom:'5px', width:'82%'}}/>
+        <AppBar title="Draftling" iconClassNameRight="muidocs-icon-navigation-expand-more" showMenuIconButton={false} style={{paddingButtom:'5px', width:'82%'}}/>
         {this.props.children}
       </div>
     );

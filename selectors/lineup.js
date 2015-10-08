@@ -17,15 +17,19 @@ const costs = (lineupWithPlayers) => {
     return lineupWithPlayers.reduce((k, v) => k + v.get('price'), 0);
 }
 
-const playersWithStatus = (players, lineup, filter, search) => {
+const playersWithStatus = (players, lineup, query) => {
+  const { position, s, replace} = query;
   let result = players.map((p) => {
       return p.set('selected', lineup.get('players').has(p.get('id')));
   });
-  if(filter){
-    result = result.filter((p) => (p.get('position') === filter));
+  if(position){
+    result = result.filter((p) => (p.get('position') === position));
   }
-  if(search) {
-    result = result.filter((p) => (p.get('name').toLowerCase().indexOf(search.toLowerCase()) > -1))
+  if(s) {
+    result = result.filter((p) => (p.get('name').toLowerCase().indexOf(s.toLowerCase()) > -1))
+  }
+  if(replace){
+    result = result.filter((p) => (p.get('id') !== parseInt(replace)))
   }
   return result;
 }
@@ -87,16 +91,17 @@ export const lineupSummary = createSelector(
   }
 );
 
-export const playersWithLineupStatus = createSelector(
+export const playerSelection = createSelector(
   players,
   lineup,
   query,
   _lineupWithPlayers,
   (players, lineup, query, lwp) => {
     return {
-      players: playersWithStatus(players, lineup, query.position, query.s),
+      players: playersWithStatus(players, lineup, query),
       missing: missing(lwp),
-      costs: costs(lwp)
+      costs: costs(lwp),
+      replacePlayer: players.get(parseInt(query.replace))
     };
   }
 );

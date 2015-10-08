@@ -1,4 +1,4 @@
-import { ADD_TO_LINEUP, REMOVE_FROM_LINEUP } from '../actions/lineup';
+import { ADD_TO_LINEUP, REMOVE_FROM_LINEUP, REPLACE_IN_LINEUP } from '../actions/lineup';
 import { Map, Set} from 'immutable';
 
 export const system = {
@@ -26,7 +26,11 @@ export default function lineups(state = initialState, action) {
     return state.updateIn([action.lineup, 'players'], (p) => {
       return p.remove(action.player)
     });
-  default:
+  case REPLACE_IN_LINEUP:
+    return state.updateIn([action.lineup, 'players'], (p) => {
+      return p.remove(action.toReplace).add(action.player)
+    });
+    default:
     return state;
   }
 }

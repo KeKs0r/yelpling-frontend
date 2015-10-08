@@ -70,7 +70,7 @@ export default class TeamSelection extends Component {
   selectPosition = (position) => {
     this.props.replaceState(null,this.props.path, {position: position});
   }
-  selectPlayer = (playerId) => {
-    this.props.replaceState(null,this.props.path, {replace: playerId, position: this.props.query.position});
+  selectPlayer = (playerId, playerPosition) => {
+    this.props.replaceState(null,this.props.path, {replace: playerId, position: playerPosition});
   }
 }

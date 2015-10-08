@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { replaceState } from 'redux-router';
 import { TextField } from 'material-ui';
 import blacklist from 'blacklist';
-
+import { LINEUP } from '../texts';
 
 @connect(
   (state) => ({
@@ -18,12 +18,17 @@ export default class SearchField extends Component {
     path: PropTypes.string.isRequired,
     replaceState: PropTypes.func.isRequired
   }
+  getPositionText(){
+      const key = 'POSITION_'+this.props.query.position;
+      return (LINEUP[key]) ? LINEUP[key] : 'Spieler'
+  }
   render() {
     const { query } = this.props;
     let propTypes = Object.keys(SearchField.propTypes);
     const curated = blacklist(this.props, ...propTypes);
+    const text = 'Suche ' + this.getPositionText();
     return (
-      <TextField type="search" onChange={this.handleChange.bind(this)} value={query.s} floatingLabelText="Suche Verteidiger" {...curated} />
+      <TextField type="search" onChange={this.handleChange.bind(this)} value={query.s} floatingLabelText={text} {...curated} />
     );
   }
   handleChange(e) {
