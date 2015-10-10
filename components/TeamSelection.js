@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { replaceState } from 'redux-router';
+import { replaceState, pushState } from 'redux-router';
 // import * as LineupActions from '../actions/lineup';
 import { lineupWithPlayers } from '../selectors/lineup';
 
@@ -21,7 +21,7 @@ import Container from 'react-container';
     };
     return Object.assign({}, data, router);
   },
-  { replaceState }
+  { replaceState, pushState }
   // dispatch => bindActionCreators(EventActions, dispatch)
 )
 export default class TeamSelection extends Component {
@@ -30,9 +30,10 @@ export default class TeamSelection extends Component {
     costs: PropTypes.number.isRequired,
     path: PropTypes.string.isRequired,
     replaceState: PropTypes.func.isRequired,
+    pushState: PropTypes.func.isRequired
   }
   render() {
-    const { lineup, costs, replaceState, query } = this.props;
+    const { lineup, costs, replaceState, pushState, query } = this.props;
     const grouped = lineup.groupBy((p) => p.get('position'));
     const goal = (grouped.get('GOAL')) ? grouped.get('GOAL').size : 0;
     const def = (grouped.get('DEF')) ? grouped.get('DEF').size : 0;
@@ -61,7 +62,7 @@ export default class TeamSelection extends Component {
             selectedPlayer={replace}
             />
           <CardActions>
-            <RaisedButton disabled={lineup.size < 11 || costs > BUDGET} label="Aufstellung speichern" />
+            <RaisedButton disabled={lineup.size < 11 || costs > BUDGET} label="Aufstellung speichern" onClick={() => pushState(null, 'lineup')} />
           </CardActions>
         </Container>
       </Card>

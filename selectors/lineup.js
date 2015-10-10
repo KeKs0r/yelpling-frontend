@@ -14,7 +14,7 @@ const distribution = (lineupWithPlayers) => {
 }
 
 const costs = (lineupWithPlayers) => {
-    return lineupWithPlayers.reduce((k, v) => k + v.get('price'), 0);
+    return lineupWithPlayers.reduce((k, v) => k + v.get('stats').get('price'), 0);
 }
 
 const playersWithStatus = (players, lineup, query) => {

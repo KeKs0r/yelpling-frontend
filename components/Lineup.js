@@ -5,6 +5,7 @@ import * as EventActions from '../actions/events';
 import { playersWithEventsSelector } from '../selectors/playersWithEvents';
 import PlayerList from './PlayerList';
 import LineupSummary from './LineupSummary';
+import Container from 'react-container';
 
 
 @connect(
@@ -24,12 +25,12 @@ class Lineup extends Component {
       gameEvent(player, score);
     }
     return (
-      <div>
+      <Container style={{width:'82%'}}>
         <h2>Aufstellung oha</h2>
         <LineupSummary lineupId={1} />
         <button onClick={triggerGameEvent}> GameEvent</button>
         <PlayerList players={players} />
-      </div>
+      </Container>
     );
   }
 }
