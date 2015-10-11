@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { ToolBar, AppBar } from 'material-ui';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div>
@@ -11,5 +11,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

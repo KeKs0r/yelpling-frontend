@@ -20,9 +20,17 @@ class Lineup extends Component {
   render() {
     const { players, gameEvent } = this.props;
     const triggerGameEvent = () => {
-      const player = Math.ceil(Math.random() * 5);
-      const score = Math.floor(Math.random() * 6) - 2;
-      gameEvent(player, score);
+      let i = 0;
+      const trigger = () => {
+        const player = Math.ceil(Math.random() * 16);
+        const score = Math.floor(Math.random() * 20) - 4;
+        gameEvent(player, score);
+        if(i < 100) {
+          setTimeout(trigger,100);
+        }
+        i++;
+      }
+      trigger();
     }
     return (
       <Container style={{width:'82%'}}>

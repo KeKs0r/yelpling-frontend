@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { List, Card, Avatar } from 'material-ui';
 import Player from './Player';
 import { LINEUP } from '../texts';
+import TransitiveNumber from 'react-transitive-number';
 
 class PlayerList extends Component {
   static propTypes = {
