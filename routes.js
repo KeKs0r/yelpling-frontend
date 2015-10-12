@@ -9,6 +9,7 @@ import HomeCurrent from './components/HomeCurrentView';
 import HomePast from './components/HomePastView';
 import Lineup from './components/Lineup';
 import Table from './components/TableView';
+import Timeline from './components/timeline/TimelineView';
 import CreateTeamView from './components/CreateTeamView';
 
 
@@ -25,6 +26,7 @@ const routes = (
       <Route path='lineup' component={Lineup} />
       <Route path='team' component={CreateTeamView} />
       <Route path='table' component={Table} />
+      <Route path='timeline' component={Timeline} />
     </Route>
   </ReduxRouter>
 );

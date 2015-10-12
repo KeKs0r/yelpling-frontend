@@ -10,9 +10,11 @@ export default function events(state = initialState, action) {
     return state.update(action.event.player, (events) => {
       let list = events;
       if(!list){
-        list = new List();
+        list = new Map();
       }
-      return list.push(action.event)
+      let event = action.event;
+      event.player = action.event.player;
+      return list.set(event.id, new Map(event));
     });
   default:
     return state;

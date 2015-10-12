@@ -13,6 +13,13 @@ function selectPlayers(players, events) {
     })
 }
 
+const selectEvents = (players, events)  => {
+    const mapped = events.flatten(1).map(e => {
+      return e.set('player', players.get(e.get('player')));
+    })
+    return mapped.sortBy(e => e.get('timestamp')).reverse();
+}
+
 /*
  * Definition of input-selectors.
  * Input-selectors should be used to abstract away the structure
@@ -35,6 +42,16 @@ export const playersWithEventsSelector = createSelector(
   (players, events) => {
     return {
       players: selectPlayers(players, events)
+    };
+  }
+);
+
+export const eventsWithPlayers = createSelector(
+  players,
+  events,
+  (players, events) => {
+    return {
+      events: selectEvents(players, events)
     };
   }
 );
