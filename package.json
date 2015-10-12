@@ -1,5 +1,5 @@
 {
-  "name": "redux-counter-example",
+  "name": "draftly",
   "version": "0.0.0",
   "description": "Redux counter example",
   "scripts": {
@@ -22,9 +22,9 @@
     "history": "^1.11.1",
     "immutable": "^3.7.5",
     "material-ui": "https://github.com/callemall/material-ui/archive/8aa375030b2fe39e9590a0655b5c16ec317e3784.zip",
-    "react": "^0.14.0-rc1",
+    "react": "^0.14.0",
     "react-container": "^0.2.4",
-    "react-dom": "^0.14.0-rc1",
+    "react-dom": "^0.14.0",
     "react-redux": "^2.1.2",
     "react-router": "^1.0.0-rc1",
     "react-tap-event-plugin": "^0.2.0",
