@@ -4,7 +4,7 @@ const styles = {
   image: {
     position: 'absolute',
     top: 0,
-    left: 25,
+    left: 90,
     width: '40px',
     height: '40px',
     borderRadius: '50%',
@@ -22,13 +22,24 @@ const styles = {
   },
   content: {
     position: 'relative',
-    marginLeft: '90px',
-    marginRight: '10px',
+    // top: 0,
+    // left: '150px',
+    marginTop: '0px',
+    left: '150px',
+    marginRight: '20px',
     background: '#ffffff',
     borderRadius: '0.25em',
     padding: '1em',
     boxShadow: '0 3px 0 #d7e4ed'
-  }
+  },
+  score: {
+    position: 'absolute',
+    top: 0,
+    left: 10,
+    // width: 35,
+    // background: '#ffffff',
+
+  },
 }
 
 
@@ -38,15 +49,19 @@ export default class TimelineEvent extends Component {
   }
   render() {
       const event = this.props.event.toJS();
+      const color = (event.score > 0) ? '#aed581' : '#e57373';
+      const scoreStyle = Object.assign({}, styles.score, {backgroundColor: color});
     return (
-          <div style={{position:'relative', top:20, height:70}} className="bounceInRight animated" >
+          <div style={{position:'relative', top:20, height:70}} >
+
             <div style={styles.image}>
-              <Avatar src={event.player.image} />
+              <Avatar src={event.player.image} className="bounceIn animated"  />
             </div>
-            <div style={styles.content} >
+            <div style={styles.content} className="bounceInRight animated"  >
               <div style={styles.arrow} />
-              Tor: / Score: {event.score}
+              {event.name}
             </div>
+            <Avatar style={scoreStyle} className="bounceIn animated" >{event.score}</Avatar>
           </div>
     );
   }

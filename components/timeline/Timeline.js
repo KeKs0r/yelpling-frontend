@@ -9,7 +9,7 @@ const styles = {
     content: '',
     position: 'absolute',
     top: 0,
-    left: '45px',
+    left: '110px',
     height: '100%',
     width: '4px',
     background: '#d7e4ed'
