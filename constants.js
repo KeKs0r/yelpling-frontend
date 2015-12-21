@@ -1,5 +1,9 @@
-export const GOAL = 'GOAL';
-export const DEF = 'DEF';
-export const MID = 'MID';
-export const ATT = 'ATT';
-export const POSITION_ORDER = [GOAL, DEF, MID, ATT];
+export const BAR = 'BAR';
+export const REST = 'REST';
+export const CAFE = 'CAFE';
+
+export const ICONS = {
+  BAR: 'local_bar',
+  CAFE: 'local_cafe',
+  REST: 'local_dining'
+}

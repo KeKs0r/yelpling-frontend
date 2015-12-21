@@ -1,34 +1,27 @@
 import React from 'react';
-import { Route, Redirect, IndexRoute} from 'react-router';
-import { ReduxRouter } from 'redux-router';
+import { Route, Router, Redirect, IndexRoute} from 'react-router';
+import { createHistory } from 'history'
+import { syncReduxAndRouter } from 'redux-simple-router'
 
 import App from './components/App';
 import Home from './components/HomeView';
-import HomeSoon from './components/HomeSoonView';
-import HomeCurrent from './components/HomeCurrentView';
-import HomePast from './components/HomePastView';
-import Lineup from './components/Lineup';
-import Table from './components/TableView';
-import Timeline from './components/timeline/TimelineView';
-import CreateTeamView from './components/CreateTeamView';
+import HomeRecommend from './components/HomeRecommend';
+import HomeAround from './components/HomeAround';
 
 
 
-const routes = (
-  <ReduxRouter>
-    <Redirect from="/" to="/home/soon" />
-    <Route path='/' component={App}>
-      <Route path='home' component={Home}>
-        <Route path='soon' component={HomeSoon} />
-        <Route path='current' component={HomeCurrent} />
-        <Route path='past' component={HomePast} />
+export default function Routes(store){
+  const history = createHistory();
+  syncReduxAndRouter(history, store);
+  return (
+    <Router history={history}>
+      <Redirect from="/" to="/home/recommendations" />
+      <Route path='/' component={App}>
+        <Route path='home' component={Home}>
+          <Route path='recommendations' component={HomeRecommend} />
+          <Route path='current' component={HomeAround} />
+        </Route>
       </Route>
-      <Route path='lineup' component={Lineup} />
-      <Route path='team' component={CreateTeamView} />
-      <Route path='table' component={Table} />
-      <Route path='timeline' component={Timeline} />
-    </Route>
-  </ReduxRouter>
-);
-
-export default routes;
+    </Router>
+  );
+}

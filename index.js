@@ -8,10 +8,11 @@ import Style from 'font-awesome/css/font-awesome.css';
 
 injectTapEventPlugin();
 const store = configureStore();
+const routes = new Routes(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    {Routes}
+    {routes}
   </Provider>,
   document.getElementById('root')
 );

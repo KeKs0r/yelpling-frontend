@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { List, ListItem, Avatar, CardHeader, FontIcon  } from 'material-ui';
 import { replaceState, pushState } from 'redux-router';
 
-@connect(
-  (state) => { return {
-    openLeague: parseInt(state.router.location.query.league),
-    path: state.router.location.pathname
-  }},
-  { replaceState, pushState }
-)
-export default class HomeSoonView extends Component {
+// @connect(
+//   (state) => { return {
+//     openLeague: parseInt(state.router.location.query.league),
+//     path: state.router.location.pathname
+//   }},
+//   { replaceState, pushState }
+// )
+export default class HomeRecommendations extends Component {
   static PropTypes = {
     openLeague: React.PropTypes.number,
     replaceState: React.PropTypes.func.isRequired
