@@ -1,17 +1,24 @@
 import React, {Component,PropTypes} from 'react';
 import {Tabs, Tab, FontIcon} from 'material-ui';
-import {replaceState} from 'redux-router';
-import {connect} from 'react-redux';
+import LocationList from './LocationList';
 
+import { connect } from 'react-redux';
+import filterLocations from '../selectors/filterLocations';
 
+@connect(
+  (state) => { return {
+    locations: filterLocations(state.locations,state.filter) ,
+  }}
+)
 export default class HomeView extends Component {
-
+  static propTypes = {
+    locations: PropTypes.object.isRequired
+  }
   render() {
-    const { replaceState, query, path } = this.props;
     return (
         <Tabs>
-          <Tab label="Recommendations">{this.props.children}</Tab>
-          <Tab label="Around You">{this.props.children}</Tab>
+          <Tab label="Recommendations"><LocationList locations={this.props.locations} /></Tab>
+          <Tab label="Around You"><div></div></Tab>
         </Tabs>
     );
   }

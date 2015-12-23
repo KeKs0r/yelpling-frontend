@@ -5,8 +5,8 @@ import { syncReduxAndRouter } from 'redux-simple-router'
 
 import App from './components/App';
 import Home from './components/HomeView';
-import HomeRecommend from './components/HomeRecommend';
-import HomeAround from './components/HomeAround';
+// import HomeRecommend from './components/HomeRecommend';
+// import HomeAround from './components/HomeAround';
 
 
 
@@ -15,11 +15,9 @@ export default function Routes(store){
   syncReduxAndRouter(history, store);
   return (
     <Router history={history}>
-      <Redirect from="/" to="/home/recommendations" />
+      <Redirect from="/" to="/home" />
       <Route path='/' component={App}>
         <Route path='home' component={Home}>
-          <Route path='recommendations' component={HomeRecommend} />
-          <Route path='current' component={HomeAround} />
         </Route>
       </Route>
     </Router>
