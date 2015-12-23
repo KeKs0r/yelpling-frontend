@@ -1,9 +1,16 @@
-export const BAR = 'BAR';
-export const REST = 'REST';
-export const CAFE = 'CAFE';
+//TYPES
+export const BUSINESS = 'business'
+
+// categories
+export const BAR = 'Bar';
+export const REST = 'Restaurant';
+export const CLUB = 'Club';
+export const CAFE = 'Cafe';
+export const BAKERY = 'Bakery';
 
 export const ICONS = {
-  BAR: 'local_bar',
-  CAFE: 'local_cafe',
-  REST: 'local_dining'
+  Bar : 'local_bar',
+  Cafe: 'local_cafe',
+  Restaurant: 'local_dining',
+  SEARCH: 'search'
 }

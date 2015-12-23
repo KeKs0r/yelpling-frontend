@@ -6,38 +6,40 @@ import LocationIcon from './LocationIcon';
 export default class Location extends Component {
   static propTypes: {
     name: React.PropTypes.string.required,
-    type: React.PropTypes.string.required,
-    icon: React.PropTypes.string,
+    categories: React.PropTypes.array.required,
     score: React.PropTypes.number,
     fullImage: React.PropTypes.string,
     description: React.PropTypes.string,
     optDescription: React.PropTypes.string
   }
   render() {
-    const {name, type, icon, fullImage, description, optDescription } = this.props;
-    let media, descText, optDescText;
+    const {name, categories, fullImage, description, optDescription } = this.props;
+    let media, descText, optDescText, expandable = false;
+    const avatar = <Avatar icon={(
+      <LocationIcon categories={categories}/>
+    )} />
+
     if(fullImage){
-      media =  (<CardMedia overlay={<CardTitle title={name} subtitle={type} />} expandable={true}>
+      media =  (<CardMedia overlay={<CardTitle title={name} subtitle={categories.join(', ')} />} expandable={true}>
                     <img src={fullImage}/>
                   </CardMedia>)
+      expandable = true;
     }
     if(description){
       descText = <CardText expandable={false}>{description}</CardText>;
     }
     if(optDescription){
-      optDescText = <CardText expandable={true}>{optDescription}</CardText>
+      optDescText = <CardText expandable={true}>{optDescription}</CardText>;
+        expandable = true;
     }
-    const avatar = (icon) ? <Avatar src={icon} /> : <Avatar icon={(
-      <LocationIcon type={type} icon={icon}/>
-    )} />
     return (
         <Card>
           <CardHeader
             title={name}
-            subtitle={type}
+            subtitle={categories.join(', ')}
             avatar={avatar}
-            actAsExpander={true}
-            showExpandableButton={true} />
+            actAsExpander={expandable}
+            showExpandableButton={expandable} />
           {media}
           {descText}
           {optDescText}

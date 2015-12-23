@@ -1,13 +1,15 @@
+'use babel'
 import React, { Component, PropTypes } from 'react';
-import { ToolBar, AppBar } from 'material-ui';
-
+import { ToolBar, AppBar, TextField, FontIcon, IconButton  } from 'material-ui';
+import FilterButton from './FilterButton';
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <AppBar title="Yelpling" iconClassNameRight="muidocs-icon-navigation-expand-more" showMenuIconButton={true} style={{paddingButtom:'5px', width:'82%'}}/>
-        {this.props.children}
-      </div>
+        <AppBar
+          title="Yelpling"
+          showMenuIconButton={true}
+          iconElementRight={<FilterButton />}
+          style={{paddingButtom:'5px'}}/>
     );
   }
 }

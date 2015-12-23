@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Router, Redirect, IndexRoute} from 'react-router';
-import { createHistory } from 'history'
+import { createHashHistory } from 'history'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
 import App from './components/App';
@@ -11,7 +11,7 @@ import HomeAround from './components/HomeAround';
 
 
 export default function Routes(store){
-  const history = createHistory();
+  const history = createHashHistory();
   syncReduxAndRouter(history, store);
   return (
     <Router history={history}>
