@@ -10,11 +10,12 @@ export default class Location extends Component {
     score: React.PropTypes.number,
     fullImage: React.PropTypes.string,
     description: React.PropTypes.string,
-    optDescription: React.PropTypes.string
+    optDescription: React.PropTypes.string,
+    selected: React.PropTypes.bool
   }
   render() {
-    const {name, categories, fullImage, description, optDescription } = this.props;
-    let media, descText, optDescText, expandable = false;
+    const {name, categories, fullImage, description, optDescription, selected } = this.props;
+    let media, descText, optDescText, expandable = false, style = {};
     const avatar = <Avatar icon={(
       <LocationIcon categories={categories}/>
     )} />
@@ -32,14 +33,21 @@ export default class Location extends Component {
       optDescText = <CardText expandable={true}>{optDescription}</CardText>;
         expandable = true;
     }
+    if(selected){
+        style.border = '3px solid rgb(255, 64, 129)';
+    }
     return (
-        <Card>
+        <Card
+          style={style}
+          initiallyExpanded={selected}
+          >
           <CardHeader
             title={name}
             subtitle={categories.join(', ')}
             avatar={avatar}
             actAsExpander={expandable}
-            showExpandableButton={expandable} />
+            showExpandableButton={expandable}
+             />
           {media}
           {descText}
           {optDescText}

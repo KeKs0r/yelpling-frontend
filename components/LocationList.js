@@ -16,6 +16,7 @@ export default class LocationList extends Component {
         description={l.description}
         optDescription={l.optDescription}
         score={l.score}
+        selected={l.selected}
         />)
     })
   return <div>{locationsOut}</div>;

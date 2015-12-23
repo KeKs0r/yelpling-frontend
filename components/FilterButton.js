@@ -3,6 +3,7 @@ import {FontIcon, FilterModal, FlatButton, IconButton, Dialog} from 'material-ui
 import {connect} from 'react-redux';
 import { SHOW_ALL, setVisibilityFilter, clearVisibilityFilter } from '../actions/filter';
 import { initForm, setFormValue, resetForm } from '../actions/form';
+import { Map } from 'immutable';
 
 import FilterSelection from './FilterSelection';
 
@@ -10,16 +11,24 @@ const FormName = 'filter';
 
 
 @connect(
-  (state) => { return {
-    form: state.form.get(FormName) || state.filter,
-    filter: state.filter
-  }},
+  (state) => {
+    let form = state.form.get(FormName);
+    if(!form && state.filter && typeof state.filter !== 'string'){
+      form = state.filter;
+    }
+    if(!form) {
+      form = new Map();
+    }
+    return {
+      form: form,
+      filter: state.filter
+    }},
    { initForm, setFormValue, resetForm, setVisibilityFilter, clearVisibilityFilter }
 )
 export default class FilterButton extends Component {
   static propTypes = {
     filter: PropTypes.oneOfType([
-      PropTypes.oneOf(SHOW_ALL),
+      PropTypes.string,
       PropTypes.object
     ]).isRequired,
     form: PropTypes.object.isRequired,

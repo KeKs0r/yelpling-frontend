@@ -11,7 +11,7 @@ const FormName = 'filter';
 export default class FilterSelection extends Component {
   static propTypes = {
     filter: PropTypes.oneOfType([
-      PropTypes.oneOf(SHOW_ALL),
+      PropTypes.string,
       PropTypes.object
     ]).isRequired,
     form: PropTypes.object.isRequired,

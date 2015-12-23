@@ -6,7 +6,7 @@ Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
 Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
 Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.`
 
-const initialState = new Map()
+const locationFixtures =  new Map()
   .set(1, new Map({
     business_id: 1,
     name: 'Hopfenreich',
@@ -41,6 +41,8 @@ const initialState = new Map()
     stars: 3,
     categories: [REST, BAR],
     review_count: 12,
+    longitude: 13.34080,
+    latitude: 52.51375,
     image: 'http://lorempixel.com/600/337/nightlife/3',
     description: lorem,
     optDescription: lorem,
@@ -53,10 +55,16 @@ const initialState = new Map()
     stars: 3,
     categories: [REST],
     review_count: 12,
+    longitude: 13.31080,
+    latitude: 52.51875,
     image: 'http://lorempixel.com/600/337/nightlife/4',
     city: 'New York'
   }))
 
+const initialState = new Map({
+  data: locationFixtures,
+  selected: 3
+});
 
 export default function locations(state = initialState, action) {
   switch (action.type) {

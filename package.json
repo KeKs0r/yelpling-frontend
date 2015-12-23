@@ -19,6 +19,7 @@
   "dependencies": {
     "blacklist": "^1.1.2",
     "font-awesome": "^4.4.0",
+    "google-map-react": "^0.9.3",
     "history": "^1.13.1",
     "immutable": "^3.7.5",
     "material-ui": "v0.14.0-rc2",
