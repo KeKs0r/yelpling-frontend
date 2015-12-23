@@ -18,7 +18,8 @@ const initialState = new Map()
     review_count: 12,
     image: 'http://lorempixel.com/600/337/nightlife/1',
     description: lorem,
-    optDescription: lorem
+    optDescription: lorem,
+    city: 'Los Angeles'
   }))
   .set(2, new Map({
     business_id: 2,
@@ -27,10 +28,11 @@ const initialState = new Map()
     longitude: 13.32724,
     latitude: 52.51745,
     stars: 3,
-    categories: [BAR, REST],
+    categories: [BAR],
     review_count: 12,
     image: 'http://lorempixel.com/600/337/nightlife/2',
-    description: lorem
+    description: lorem,
+    city: 'Los Angeles'
   }))
   .set(3, new Map({
     business_id: 3,
@@ -41,7 +43,8 @@ const initialState = new Map()
     review_count: 12,
     image: 'http://lorempixel.com/600/337/nightlife/3',
     description: lorem,
-    optDescription: lorem
+    optDescription: lorem,
+    city: 'Los Angeles'
   }))
   .set(4, new Map({
     business_id: 4,
@@ -50,7 +53,8 @@ const initialState = new Map()
     stars: 3,
     categories: [REST],
     review_count: 12,
-    image: 'http://lorempixel.com/600/337/nightlife/4'
+    image: 'http://lorempixel.com/600/337/nightlife/4',
+    city: 'New York'
   }))
 
 
