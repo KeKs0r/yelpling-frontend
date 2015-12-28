@@ -44,6 +44,7 @@ const toolTipHover = {
   bottom: '100%',
   color:' #fff',
   display: 'block',
+  zIndex: 5,
   left: -25,
   marginBottom: 40,
   opacity: 0,

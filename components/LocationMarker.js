@@ -19,19 +19,22 @@ export default class LocationMarker extends Component {
   static propTypes = {
     text: PropTypes.string.isRequired,
     categories: PropTypes.array.isRequired,
-    number: PropTypes.number.isRequired,
-    selected: PropTypes.bool
+    number: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]).isRequired,
+    selected: PropTypes.bool,
   }
   render() {
-    const {text, categories, number, $hover, selected} = this.props;
+    const {text, categories, number, $hover, selected, onSelect} = this.props;
     const highlight = $hover || selected;
     const avatar = <Avatar icon={(
       <LocationIcon categories={categories}/>
     )} />
     return (
-       <div>
+       <div >
          <Tooltip showTooltip={highlight}
-           component={<Pin number={number} highlight={highlight} />}>
+           component={<Pin number={number} highlight={highlight}/>}>
            <div style={{fontSize:15, fontWeight:'bold'}}>{text}</div>
            <div>{categories.join(', ')}</div>
          </Tooltip>

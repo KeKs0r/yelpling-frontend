@@ -1,5 +1,6 @@
 import { Map } from 'immutable';
 import { BUSINESS, BAR, REST, BAK } from '../constants';
+import { SELECT_LOCATION } from '../actions/locations';
 
 const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
@@ -68,6 +69,8 @@ const initialState = new Map({
 
 export default function locations(state = initialState, action) {
   switch (action.type) {
+    case SELECT_LOCATION:
+      return state.set('selected', action.index);
     default: return state;
   }
 }

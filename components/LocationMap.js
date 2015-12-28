@@ -6,16 +6,20 @@ import Marker from './LocationMarker';
 
 export default class LocationMap extends Component {
   static propTypes = {
-    locations: PropTypes.object.isRequired
+    locations: PropTypes.object.isRequired,
+    onSelectLocation: PropTypes.func.isRequired
   }
   // static defaultProps = {
   //   center: {lat: 59.938043, lng: 30.337157},
   //   zoom: 9,
   //   greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
   // };
-
+  _onChildClick = (key, childProps) => {
+      const index = parseInt(key);
+      this.props.onSelectLocation(index);
+  }
   render() {
-    const { locations } = this.props;
+    const { locations, onSelectLocation } = this.props;
     const markers = locations.map((l, index) => {
       return <Marker
           key={l.get('business_id')}
@@ -25,11 +29,16 @@ export default class LocationMap extends Component {
           selected={l.get('selected')}
           categories={l.get('categories')}
           number={index}
-        />
-    })
+          onSelect={() => {
+            alert(l.get('business_id'));
+            onSelectLocation(l.get('business_id'))
+          }
+        }/>
+    }).toArray();
     return (
        <GoogleMap
-         center={{lat:52.51375, lng:13.34080}}
+         defaultCenter={{lat:52.51375, lng:13.34080}}
+         onChildClick={this._onChildClick}
          zoom={14}
          >
          {markers}

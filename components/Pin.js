@@ -12,6 +12,7 @@ export default class HomeView extends Component {
     const factor = (highlight) ? 1.4 : 1;
 
     let pinStyle = {
+      zIndex: -1,
       width: 30 * factor,
       height: 30 * factor,
       borderRadius: '50% 50% 50% 0',
