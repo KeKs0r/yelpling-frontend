@@ -23,6 +23,7 @@ export default class LocationMap extends Component {
           lat={l.get('latitude')}
           text={l.get('name')}
           selected={l.get('selected')}
+          categories={l.get('categories')}
           number={index}
         />
     })

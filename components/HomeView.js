@@ -1,5 +1,5 @@
 import React, {Component,PropTypes} from 'react';
-import {Tabs, Tab, FontIcon} from 'material-ui';
+import {Tabs, Tab, FontIcon, SwipeableView} from 'material-ui';
 import LocationList from './LocationList';
 import LocationMap  from './LocationMap';
 import Pin from './Pin';
@@ -19,7 +19,8 @@ export default class HomeView extends Component {
   render() {
     return (
         <Tabs>
-          <Tab label="Recommendations"><LocationList locations={this.props.locations} /></Tab>
+          <Tab label="Recommendations">
+            <LocationList locations={this.props.locations} /></Tab>
           <Tab label="Around You">
             <div style={{height:'600px', width:'400px'}}>
               <LocationMap locations={this.props.locations} />
