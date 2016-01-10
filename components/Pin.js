@@ -4,7 +4,10 @@ import React, {Component,PropTypes} from 'react';
 
 export default class HomeView extends Component {
   static propTypes = {
-    number: PropTypes.string.isRequired,
+    number: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]).isRequired,
     highlight: PropTypes.bool
   }
   render() {

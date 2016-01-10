@@ -2,25 +2,24 @@ import React, {PropTypes, Component} from 'react';
 import GoogleMap from 'google-map-react';
 
 import Marker from './LocationMarker';
+import MyselfPin from './MySelfPin';
 // import Marker  from './Pin';
 
 export default class LocationMap extends Component {
   static propTypes = {
     locations: PropTypes.object.isRequired,
+    myLocation: PropTypes.object,
     onSelectLocation: PropTypes.func.isRequired
   }
-  // static defaultProps = {
-  //   center: {lat: 59.938043, lng: 30.337157},
-  //   zoom: 9,
-  //   greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
-  // };
   _onChildClick = (key, childProps) => {
       const index = parseInt(key);
       this.props.onSelectLocation(index);
   }
   render() {
-    const { locations, onSelectLocation } = this.props;
-    const markers = locations.map((l, index) => {
+    const lat = (myLocation) ? myLocation.coords.latitude : 52.51375;
+    const long = (myLocation) ? myLocation.coords.longitude : 13.34080;
+    const { locations, onSelectLocation, myLocation } = this.props;
+    let markers = locations.map((l, index) => {
       return <Marker
           key={l.get('business_id')}
           lng={l.get('longitude')}
@@ -35,11 +34,18 @@ export default class LocationMap extends Component {
           }
         }/>
     }).toArray();
+    if(myLocation){
+      markers.push(<MyselfPin
+                 key="myself"
+                 lng={myLocation.coords.longitude}
+                 lat={myLocation.coords.latitude}
+                 />);
+    }
     return (
        <GoogleMap
-         defaultCenter={{lat:52.51375, lng:13.34080}}
+         center={{lat:lat, lng:long}}
          onChildClick={this._onChildClick}
-         zoom={14}
+         zoom={13}
          >
          {markers}
       </GoogleMap>
