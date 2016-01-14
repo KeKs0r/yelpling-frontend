@@ -1,21 +1,11 @@
 {
   "name": "Yelpling",
-  "version": "0.0.0",
-  "description": "Redux counter example",
+  "version": "1.0.0",
+  "description": "IOSL Yelp Data Challenge",
   "scripts": {
-    "start": "node server.js",
-    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register",
-    "test:watch": "npm test -- --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rackt/redux.git"
+    "start": "node server.js"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rackt/redux/issues"
-  },
-  "homepage": "http://rackt.github.io/redux",
   "dependencies": {
     "blacklist": "^1.1.2",
     "font-awesome": "^4.4.0",
