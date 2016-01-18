@@ -33,9 +33,9 @@ export default class Location extends Component {
       optDescText = <CardText expandable={true}>{optDescription}</CardText>;
         expandable = true;
     }
-    if(selected){
-        style.border = '3px solid rgb(255, 64, 129)';
-    }
+    // if(selected){
+    //     style.border = '3px solid rgb(255, 64, 129)';
+    // }
     return (
         <Card
           style={style}

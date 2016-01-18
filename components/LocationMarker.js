@@ -32,7 +32,7 @@ export default class LocationMarker extends Component {
       <LocationIcon categories={categories}/>
     )} />
     return (
-       <div >
+       <div>
          <Tooltip showTooltip={highlight}
            component={<Pin number={number} highlight={highlight}/>}>
            <div style={{fontSize:15, fontWeight:'bold'}}>{text}</div>

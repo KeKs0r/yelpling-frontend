@@ -6,14 +6,14 @@ import Pin from './Pin';
 
 import { connect } from 'react-redux';
 import filterLocations from '../selectors/filterLocations';
-import { selectLocation, loadMyLocation } from '../actions/locations';
+import { selectLocation, loadMyLocation, loadLocations } from '../actions/locations';
 
 @connect(
   state => ({
     locations: filterLocations(state.locations,state.filter),
     myLocation: state.myLocation,
   }),
-  { selectLocation, loadMyLocation }
+  { selectLocation, loadMyLocation, loadLocations }
 )
 export default class HomeView extends Component {
   static propTypes = {
@@ -23,9 +23,12 @@ export default class HomeView extends Component {
     myLocation: PropTypes.object
   }
   componentDidMount() {
-    const {myLocation, loadMyLocation } = this.props;
+    const {myLocation, loadMyLocation, locations, loadLocations } = this.props;
     if(!myLocation){
       loadMyLocation();
+    }
+    if(!locations || locations.size === 0){
+      loadLocations();
     }
   }
   render() {

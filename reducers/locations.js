@@ -1,76 +1,27 @@
 import { Map } from 'immutable';
 import { BUSINESS, BAR, REST, BAK } from '../constants';
-import { SELECT_LOCATION } from '../actions/locations';
-
-const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.`
-
-const locationFixtures =  new Map()
-  .set(1, new Map({
-    business_id: 1,
-    name: 'Hopfenreich',
-    typ: BUSINESS,
-    categories: [BAR, REST],
-    longitude: 13.32080,
-    latitude: 52.51275,
-    stars: 3,
-    review_count: 12,
-    image: 'http://lorempixel.com/600/337/nightlife/1',
-    description: lorem,
-    optDescription: lorem,
-    city: 'Los Angeles'
-  }))
-  .set(2, new Map({
-    business_id: 2,
-    name: 'Schnelle Quelle',
-    typ: BUSINESS,
-    longitude: 13.32724,
-    latitude: 52.51745,
-    stars: 3,
-    categories: [BAR],
-    review_count: 12,
-    image: 'http://lorempixel.com/600/337/nightlife/2',
-    description: lorem,
-    city: 'Los Angeles'
-  }))
-  .set(3, new Map({
-    business_id: 3,
-    name: 'Burgermeister',
-    typ: BUSINESS,
-    stars: 3,
-    categories: [REST, BAR],
-    review_count: 12,
-    longitude: 13.34080,
-    latitude: 52.51375,
-    image: 'http://lorempixel.com/600/337/nightlife/3',
-    description: lorem,
-    optDescription: lorem,
-    city: 'Los Angeles'
-  }))
-  .set(4, new Map({
-    business_id: 4,
-    name: 'Piris',
-    typ: BUSINESS,
-    stars: 3,
-    categories: [REST],
-    review_count: 12,
-    longitude: 13.31080,
-    latitude: 52.51875,
-    image: 'http://lorempixel.com/600/337/nightlife/4',
-    city: 'New York'
-  }))
+import { SELECT_LOCATION, LOCATIONS_LOADED } from '../actions/locations';
 
 const initialState = new Map({
-  data: locationFixtures,
-  selected: 3
+  data: new Map(),
+  selected: 0
 });
 
 export default function locations(state = initialState, action) {
   switch (action.type) {
     case SELECT_LOCATION:
       return state.set('selected', action.index);
+    case LOCATIONS_LOADED:
+      return state.update('data', (data) => {
+        return data.withMutations((d) => {
+            if(action.locations){
+              action.locations.forEach((l) => {
+                d.set(l.business_id, new Map(l));
+              });
+            }
+            return d;
+        });
+      });
     default: return state;
   }
 }

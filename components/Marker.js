@@ -196,6 +196,7 @@ export default class MapMarker extends Component {
             <strong>{this.props.name}</strong>
           </div>
           <div className="map-marker-hint__address">
+            askldfaljksdfhlkajsdh
             {'address'/*this.props.marker.get('address')*/}
           </div>
 
