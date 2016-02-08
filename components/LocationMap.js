@@ -12,25 +12,24 @@ export default class LocationMap extends Component {
     onSelectLocation: PropTypes.func.isRequired
   }
   _onChildClick = (key, childProps) => {
-      const index = parseInt(key);
-      this.props.onSelectLocation(index);
+      this.props.onSelectLocation(key);
   }
   render() {
-    const lat = (myLocation) ? myLocation.coords.latitude : 52.51375;
-    const long = (myLocation) ? myLocation.coords.longitude : 13.34080;
+    const lat = (myLocation) ? myLocation.coords.latitude : 49.0035;
+    const long = (myLocation) ? myLocation.coords.longitude : 8.3958208;
     const { locations, onSelectLocation, myLocation } = this.props;
-    let markers = locations.map((l, index) => {
+    let markers = locations.toList().map((l, index) => {
       return <Marker
-          key={l.get('business_id')}
+          key={l.get('yelp_id')}
           lng={l.get('longitude')}
           lat={l.get('latitude')}
           text={l.get('name')}
           selected={l.get('selected')}
           categories={l.get('categories')}
-          number={index}
+          number={index+1}
           onSelect={() => {
-            alert(l.get('business_id'));
-            onSelectLocation(l.get('business_id'))
+            alert(l.get('yelp_id'));
+            onSelectLocation(l.get('yelp_id'))
           }
         }/>
     }).toArray();

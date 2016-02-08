@@ -3,7 +3,8 @@ import { BUSINESS, BAR, REST, BAK } from '../constants';
 import { SELECT_LOCATION, LOCATIONS_LOADED } from '../actions/locations';
 
 const initialState = new Map({
-  data: new Map(),
+  businesses: new Map(),
+  recommendations: new Map(),
   selected: 0
 });
 
@@ -12,15 +13,22 @@ export default function locations(state = initialState, action) {
     case SELECT_LOCATION:
       return state.set('selected', action.index);
     case LOCATIONS_LOADED:
-      return state.update('data', (data) => {
-        return data.withMutations((d) => {
-            if(action.locations){
-              action.locations.forEach((l) => {
-                d.set(l.business_id, new Map(l));
+    const data = action.data;
+    return state.withMutations((d) => {
+            if(data && data.businesses){
+              data.businesses.forEach((l) => {
+                d.setIn(['businesses',l.yelp_id], new Map(l));
               });
             }
+            if(data && data.recommendations){
+              const rec = data.recommendations;
+              for (var id in rec) {
+                  if (rec.hasOwnProperty(id)) {
+                      d.setIn(['recommendations',id], rec[id]);
+                  }
+              }
+            }
             return d;
-        });
       });
     default: return state;
   }

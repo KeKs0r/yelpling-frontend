@@ -4,8 +4,12 @@ import { Map, Set } from 'immutable';
 import { SHOW_ALL } from '../actions/filter';
 
 
-const Fields = ['categories.Bar', 'categories.Restaurant'];
+const Fields = ['categories.Bar', 'categories.Restaurants', 'categories.Shopping', 'categories.Hotels'];
 const FormName = 'filter';
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 
 export default class FilterSelection extends Component {
@@ -28,7 +32,7 @@ export default class FilterSelection extends Component {
   renderArea(fields, key) {
       return (
         <div key={key}>
-          <h3>{key}</h3>
+          <h3>{capitalizeFirstLetter(key)}</h3>
           <div>
             {fields.map(this.renderField.bind(this))}
           </div>

@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 import { LOGIN } from '../actions/auth';
 
-const initialState = new Map({user: 1});
+const initialState = new Map({user: '15SdjuK7DmYqUAj6rjGowg'});
 
 
 export default function login(state = initialState, action) {

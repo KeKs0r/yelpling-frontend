@@ -7,7 +7,26 @@ import { login } from '../actions/auth';
 import NavigationClose from 'material-ui/lib/svg-icons/navigation/close';
 
 const userIds = [
-  1,2,3,4,5,6
+  {
+    name: 'Herbert Müller',
+    id:'15SdjuK7DmYqUAj6rjGowg'
+  },
+  {
+    name:'2',
+    id: 2,
+  },
+  {
+    name:'3',
+    id: 3,
+  },
+  {
+    name:'4',
+    id: 4,
+  },
+  {
+    name:'5',
+    id: 5,
+  }
 ];
 
 @connect(
@@ -25,8 +44,8 @@ export default class MyAppBar extends Component {
   handleToggle = () => this.setState({open: !this.state.open});
   render() {
     const {user, login} = this.props;
-    const items = userIds.map((id) => {
-      return  <MenuItem checked={(id === user)} insetChildren={true} onTouchTap={() => {login(id)}}>User {id}</MenuItem>
+    const items = userIds.map((u) => {
+      return  <MenuItem key={u.id} checked={(u.id === user)} insetChildren={true} onTouchTap={() => {login(u.id)}}>{u.name}</MenuItem>
     })
     return (
         <AppBar

@@ -6,12 +6,23 @@ import Pin from './Pin';
 
 import { connect } from 'react-redux';
 import filterLocations from '../selectors/filterLocations';
+import recommendations from '../selectors/recommendations';
+import selectLocationSelector from '../selectors/selectLocation';
 import { selectLocation, loadMyLocation, loadLocations } from '../actions/locations';
 
 @connect(
   state => ({
-    locations: filterLocations(state.locations,state.filter),
+    locations:
+      filterLocations(
+        selectLocationSelector(
+          recommendations(
+            state.locations.get('recommendations'),
+            state.locations.get('businesses')),
+          state.locations.get('selected')
+          ),
+        state.filter),
     myLocation: state.myLocation,
+    auth: state.auth
   }),
   { selectLocation, loadMyLocation, loadLocations }
 )
@@ -23,12 +34,12 @@ export default class HomeView extends Component {
     myLocation: PropTypes.object
   }
   componentDidMount() {
-    const {myLocation, loadMyLocation, locations, loadLocations } = this.props;
+    const {myLocation, loadMyLocation, locations, loadLocations, auth } = this.props;
     if(!myLocation){
       loadMyLocation();
     }
     if(!locations || locations.size === 0){
-      loadLocations();
+      loadLocations(auth.get('user'));
     }
   }
   render() {
