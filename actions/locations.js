@@ -1,4 +1,3 @@
-import data from './data.js';
 // Filters
 export const SHOW_ALL = 'SHOW_ALL';
 
@@ -21,13 +20,16 @@ export function selectLocation(index) {
 }
 
 
+export const myLocation = {
+  lat: 36.114662,
+  long: -115.1698946
+}
+
 export function loadLocations(user){
-  //const url = `http://iosl.bergner.fr/api/v1/users/${user}/recommendations`;
-  const url = 'http://localhost:7381'
+  const url = `http://iosl.bergner.fr/api/v1/users/${user}/recommendations`;
   return dispatch => {
     return fetch(url).then(
-        //(res) => res.json(),
-        (res) => data
+        (res) => res.json(),
       ).then(
         (data) => { dispatch({type:LOCATIONS_LOADED, data, user})}
       ).catch((err) => {console.error(err)})
@@ -41,8 +43,8 @@ export function loadMyLocation(){
     }
     getLocation({
       coords: {
-        latitude: 49.0035,
-        longitude: 8.3958208
+        latitude: myLocation.lat,
+        longitude: myLocation.long
       }
     })
     //navigator.geolocation.getCurrentPosition(getLocation);

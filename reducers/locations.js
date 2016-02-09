@@ -14,6 +14,7 @@ export default function locations(state = initialState, action) {
       return state.set('selected', action.index);
     case LOCATIONS_LOADED:
     const data = action.data;
+    const user = action.user;
     return state.withMutations((d) => {
             if(data && data.businesses){
               data.businesses.forEach((l) => {
@@ -24,7 +25,7 @@ export default function locations(state = initialState, action) {
               const rec = data.recommendations;
               for (var id in rec) {
                   if (rec.hasOwnProperty(id)) {
-                      d.setIn(['recommendations',id], rec[id]);
+                      d.setIn(['recommendations', user, id], rec[id]);
                   }
               }
             }

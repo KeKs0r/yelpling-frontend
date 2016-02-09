@@ -16,7 +16,7 @@ import { selectLocation, loadMyLocation, loadLocations } from '../actions/locati
       filterLocations(
         selectLocationSelector(
           recommendations(
-            state.locations.get('recommendations'),
+            state.locations.getIn(['recommendations', state.auth.get('user')]),
             state.locations.get('businesses')),
           state.locations.get('selected')
           ),
@@ -34,13 +34,20 @@ export default class HomeView extends Component {
     myLocation: PropTypes.object
   }
   componentDidMount() {
-    const {myLocation, loadMyLocation, locations, loadLocations, auth } = this.props;
+    const {myLocation, loadMyLocation} = this.props;
     if(!myLocation){
       loadMyLocation();
     }
+    const {locations, loadLocations, auth } = this.props;
     if(!locations || locations.size === 0){
       loadLocations(auth.get('user'));
     }
+  }
+  componentDidUpdate(prevProps){
+      if(prevProps.auth !== this.props.auth){
+          const {locations, loadLocations, auth } = this.props;
+          loadLocations(auth.get('user'));
+      }
   }
   render() {
     const {locations, selectLocation, myLocation} = this.props;

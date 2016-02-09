@@ -4,7 +4,10 @@ import { Map, Set } from 'immutable';
 import { SHOW_ALL } from '../actions/filter';
 
 
-const Fields = ['categories.Bar', 'categories.Restaurants', 'categories.Shopping', 'categories.Hotels'];
+const Fields = [
+  'categories.Bars', 'categories.Restaurants', 'categories.Shopping', 'categories.Hotels', 'categories.Coffee & Tea',
+  'city.Las Vegas', 'city.Pittsburgh', 'city.Tempe', 'city.Matthews', 'city.Charlotte', 'city.Scottsdale', 'city.Champaign'
+];
 const FormName = 'filter';
 
 function capitalizeFirstLetter(string) {

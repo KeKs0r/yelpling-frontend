@@ -15,9 +15,11 @@ export default class LocationMap extends Component {
       this.props.onSelectLocation(key);
   }
   render() {
-    const lat = (myLocation) ? myLocation.coords.latitude : 49.0035;
-    const long = (myLocation) ? myLocation.coords.longitude : 8.3958208;
     const { locations, onSelectLocation, myLocation } = this.props;
+    // const lat = (myLocation) ? myLocation.coords.latitude : myLocation.lat;
+    // const long = (myLocation) ? myLocation.coords.longitude : myLocation.long;
+    const lat = myLocation.coords.latitude;
+    const long = myLocation.coords.longitude;
     let markers = locations.toList().map((l, index) => {
       return <Marker
           key={l.get('yelp_id')}
@@ -44,7 +46,7 @@ export default class LocationMap extends Component {
        <GoogleMap
          center={{lat:lat, lng:long}}
          onChildClick={this._onChildClick}
-         zoom={13}
+         zoom={14}
          >
          {markers}
       </GoogleMap>
