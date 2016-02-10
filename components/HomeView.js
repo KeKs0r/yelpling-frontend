@@ -58,7 +58,7 @@ export default class HomeView extends Component {
 
           </Tab>
           <Tab label="Around You">
-            <div style={{height:'850', width:'100%'}}>
+            <div style={{height:'700', width:'100%'}}>
               <LocationMap
                 locations={locations}
                 onSelectLocation={selectLocation}
